@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>angles</title>
+<style>
+ body{margin:0;background:#f4f1ec;font:12px ui-sans-serif,system-ui,sans-serif;color:#333}
+ .g{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px}
+ figure{margin:0}figcaption{text-align:center;padding:3px}
+ cup-viewer{aspect-ratio:3/4}
+</style>
+<div class="g">
+ <figure><cup-viewer cup="woodgrain-16oz-hot" texture="textures/16oz-hot-abstract.png" polar="40" azimuth="0"></cup-viewer><figcaption>polar 40 (above)</figcaption></figure>
+ <figure><cup-viewer cup="woodgrain-16oz-hot" texture="textures/16oz-hot-abstract.png" polar="60" azimuth="0"></cup-viewer><figcaption>polar 60</figcaption></figure>
+ <figure><cup-viewer cup="woodgrain-16oz-hot" texture="textures/16oz-hot-abstract.png" polar="74" azimuth="0"></cup-viewer><figcaption>polar 74 (default)</figcaption></figure>
+ <figure><cup-viewer cup="woodgrain-16oz-hot" texture="textures/16oz-hot-abstract.png" polar="100" azimuth="0"></cup-viewer><figcaption>polar 100 (below)</figcaption></figure>
+ <figure><cup-viewer cup="woodgrain-16oz-hot" texture="textures/16oz-hot-abstract.png" polar="74" azimuth="90"></cup-viewer><figcaption>az 90</figcaption></figure>
+ <figure><cup-viewer cup="woodgrain-16oz-hot" texture="textures/16oz-hot-abstract.png" polar="74" azimuth="180"></cup-viewer><figcaption>az 180 (seam)</figcaption></figure>
+ <figure><cup-viewer cup="woodgrain-16oz-hot" texture="textures/16oz-hot-abstract.png" polar="74" azimuth="270"></cup-viewer><figcaption>az 270</figcaption></figure>
+ <figure><cup-viewer cup="woodgrain-16oz-hot" texture="textures/16oz-hot-abstract.png" polar="74" azimuth="0" lid="none"></cup-viewer><figcaption>no lid</figcaption></figure>
+</div>
+<script type="module" src="cup-viewer.js"></script>

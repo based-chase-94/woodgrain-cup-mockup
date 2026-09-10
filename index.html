@@ -1,0 +1,273 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Woodgrain Cup Mockups</title>
+<style>
+  :root {
+    --bg:#f4f1ec; --ink:#1b1a18; --muted:#6f6a63; --line:#ded8cf;
+    --accent:#FE5000; --chip:#e9e4db; color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#151412; --ink:#f0ece5; --muted:#98918a; --line:#2e2b27; --chip:#232019;
+      color-scheme: dark;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.55 ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:48px 24px 80px; }
+  header { border-bottom:1px solid var(--line); padding-bottom:18px; margin-bottom:22px; }
+  h1 { margin:0 0 5px; font-size:25px; letter-spacing:-.02em; }
+  .sub { color:var(--muted); font-size:14px; margin:0; }
+
+  [role=tablist] { display:flex; flex-wrap:wrap; gap:6px; }
+  .sizes { margin-bottom:30px; }
+  .designs { margin-bottom:18px; }
+  .controls { display:flex; flex-wrap:wrap; gap:16px 22px; margin:0 0 26px; }
+  .ctl { display:flex; align-items:center; gap:9px; }
+  .ctl > span { font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+                color:var(--muted); font-weight:600; }
+  .seg { display:inline-flex; border:1px solid var(--line); border-radius:8px;
+         overflow:hidden; }
+  .seg button { font:inherit; font-size:13px; cursor:pointer; border:0;
+                background:transparent; color:var(--muted); padding:4px 11px;
+                transition:background .15s,color .15s; }
+  .seg button:hover { color:var(--ink); }
+  .seg button[aria-pressed=true] { background:var(--ink); color:var(--bg); }
+  button[role=tab] { font:inherit; font-size:14px; cursor:pointer; border:1px solid var(--line);
+    background:transparent; color:var(--muted); padding:7px 15px; border-radius:999px;
+    transition:background .15s,color .15s,border-color .15s; }
+  button[role=tab]:hover { color:var(--ink); }
+  button[role=tab][aria-selected=true] { background:var(--ink); border-color:var(--ink);
+    color:var(--bg); }
+  .designs button[role=tab] { font-size:13px; padding:5px 13px; }
+  .designs button[role=tab][aria-selected=true] { background:var(--accent);
+    border-color:var(--accent); color:#fff; }
+
+  .stage { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+           gap:40px; align-items:center; }
+  @media (max-width:760px) { .stage { grid-template-columns:1fr; gap:24px; } }
+  cup-viewer { color:var(--ink); border-radius:14px;
+    background:radial-gradient(120% 90% at 50% 8%,
+      color-mix(in srgb, var(--ink) 4%, transparent), transparent 70%); }
+  h2 { font-size:12px; letter-spacing:.11em; text-transform:uppercase;
+       color:var(--muted); margin:0 0 12px; font-weight:600; }
+  dl { display:grid; grid-template-columns:auto 1fr; gap:8px 18px; margin:0 0 26px;
+       font-size:14px; }
+  dt { color:var(--muted); }
+  dd { margin:0; }
+  .swatch { display:inline-block; width:11px; height:11px; border-radius:3px;
+            background:var(--accent); margin-right:7px; vertical-align:-1px;
+            box-shadow:0 0 0 1px rgb(0 0 0 / .12); }
+  .note { font-size:13px; color:var(--muted); border-left:2px solid var(--line);
+          padding-left:14px; margin:0 0 22px; }
+  code { font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;
+         background:var(--chip); padding:1px 5px; border-radius:4px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Woodgrain Bagels — cup mockups</h1>
+    <p class="sub">Drag to rotate · scroll to zoom</p>
+  </header>
+
+  <div role="tablist" aria-label="Cup size" class="sizes" id="sizes"></div>
+
+  <div class="stage">
+    <cup-viewer id="viewer" autorotate></cup-viewer>
+    <div>
+      <div role="tablist" aria-label="Design" class="designs" id="designs"></div>
+      <div class="controls" id="controls"></div>
+      <h2>Specification</h2>
+      <dl id="spec"></dl>
+      <h2>Design</h2>
+      <p class="note" id="designNote"></p>
+      <h2>Note on colour</h2>
+      <p class="note">Orange 021 C is outside both CMYK and sRGB gamut. These renders use
+      <code>#FE5000</code>, the closest sRGB can get — the real ink is more luminous
+      than any screen can show. Approve the colour from a physical Pantone chip.</p>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+const SIZES = [
+  {
+    id: '16oz-hot', label: '16 oz Hot', cup: 'woodgrain-16oz-hot',
+    lid: 'black', material: '', rim: '#FE5000',
+    spec: [['Size', '16 oz hot, single wall paper'],
+           ['Dimensions', '90 mm rim · 60 mm base · 135 mm tall'],
+           ['Flood', '<span class="swatch"></span>PMS Orange 021 C'],
+           ['Graphic', 'Black — {design}'],
+           ['Lid', 'Black sip lid, 90 mm']],
+    designs: [
+      { id: 'abstract', label: 'Abstract',
+        texture: 'textures/16oz-hot-abstract.png',
+        note: 'One oversized woodgrain mark, wordmark set opposite it. The mark stops 13 mm short of the rim, leaving a clean flood band at the lip, and bleeds off the base — 11% of the black folds into the crimp. Placed as a hybrid: the mark is projected across the full 360° wrap, while the three wordmark lines are placed separately against a single reference radius. Projecting the lockup along with the mark would have made WOODGRAIN come out proportionally wider than ESTD. COLO.' },
+      { id: 'straight-logo', label: 'Straight Logo',
+        texture: 'textures/16oz-hot-straight-logo.png',
+        note: 'Full logo lockup, centred on the front, black over the 021 C flood. Re-laid onto the cone line by line: the ring mark and BAGELS sit rigid and undistorted, while WOODGRAIN and HAND ROLLED IN COLORADO bend onto their own arcs. All ink inside the safe area — nothing trimmed or folded.' },
+    ],
+  },
+  {
+    id: '24oz-hot', label: '24 oz Hot', cup: 'woodgrain-24oz-hot',
+    lid: 'black', material: '', rim: '#FE5000',
+    spec: [['Size', '24 oz hot, single wall paper'],
+           ['Dimensions', '90 mm rim · 60 mm base · 175 mm tall'],
+           ['Flood', '<span class="swatch"></span>PMS Orange 021 C'],
+           ['Graphic', '{design}'],
+           ['Lid', 'Black sip lid, 90 mm']],
+    designs: [
+      { id: 'straight-logo', label: 'Straight Logo',
+        texture: 'textures/24oz-hot-straight-logo.png',
+        note: 'The 16 oz lockup re-placed on the taller cone at 1.15×, centred at the same fraction of the cup height. Both hot cups share a 90 mm rim and 60 mm base, so at equal fractional height the radius is identical — the scale-up is an aesthetic call, not a geometric one, and it takes the wrap from 122° to 139°. Re-warped for this cone rather than reused: the 24 oz sweeps 31.5° on the blank against the 16 oz at 40.8°.' },
+      { id: 'blank', label: 'Blank', texture: 'textures/flood-021c.png',
+        note: 'No artwork yet — plain 021 C flood.' },
+    ],
+  },
+  {
+    id: '16oz-cold', label: '16 oz Cold', cup: 'woodgrain-16oz-cold',
+    lid: 'none', material: 'clear', rim: '',
+    spec: [['Size', '16 oz cold, clear PET'],
+           ['Dimensions', '95 mm rim · 60 mm base · 132 mm tall'],
+           ['Ink', '<span class="swatch"></span>PMS Orange 021 C, 1-colour on clear'],
+           ['Graphic', '{design}'],
+           ['Lid', 'Undecided']],
+    designs: [
+      { id: 'fourteeners', label: 'Fourteeners',
+        texture: 'textures/16oz-cold-fourteeners.png',
+        transTexture: 'textures/16oz-cold-fourteeners-trans.png',
+        note: 'Redrawn at true size in wrap space, then re-laid onto the cone — 54 cells, each rotated onto its own radial so the rows read level. Five rows of peaks wrapping 322–327°, spanning 21–113 mm up the cup. All ink inside the safe area, nothing lapping at the seam.' },
+      { id: 'straight-logo', label: 'Straight Logo',
+        texture: 'textures/16oz-cold-straight-logo.png',
+        transTexture: 'textures/16oz-cold-straight-logo-trans.png',
+        note: 'The 24 oz lockup re-placed at 0.85×, centred at the same fraction of the cup height. The two cold cups have nearly the same circumference but the 16 oz is shorter, so nothing scales cleanly: matching the 24 oz\'s share of height wants 0.73×, matching its share of the wrap wants 0.98×. 0.85 is the middle of those. Re-warped for this cone, not scaled from the 24 oz output.' },
+      { id: 'blank', label: 'Blank', texture: '', transTexture: '',
+        note: 'The bare cup. Dimensions are assumed — 95 mm rim keeps realistic proportions but means a different lid from the 24 oz. Say the word and I can move it to 98 mm so one lid fits both cold sizes.' },
+    ],
+  },
+  {
+    id: '24oz-cold', label: '24 oz Cold', cup: 'woodgrain-24oz-cold',
+    lid: 'none', material: 'clear', rim: '',
+    spec: [['Size', '24 oz cold, clear PET'],
+           ['Dimensions', '98 mm rim · 60 mm base · 180 mm tall'],
+           ['Ink', '<span class="swatch"></span>PMS Orange 021 C, 1-colour on clear'],
+           ['Graphic', '{design}'],
+           ['Lid', 'Undecided']],
+    designs: [
+      { id: 'fourteeners', label: 'Fourteeners',
+        texture: 'textures/24oz-cold-fourteeners.png',
+        transTexture: 'textures/24oz-cold-fourteeners-trans.png',
+        note: 'Redrawn at true size in wrap space, then re-laid onto the cone — 59 cells across seven bands: title, five rows of peaks, and the tagline. Each is rotated onto its own radial so everything reads level. Rows wrap 309–331°, spanning 28–154 mm up the cup. All ink inside the safe area. A light ink on clear still needs a white underbase to reach this density in print.' },
+      { id: 'straight-logo', label: 'Straight Logo',
+        texture: 'textures/24oz-cold-straight-logo.png',
+        transTexture: 'textures/24oz-cold-straight-logo-trans.png',
+        note: 'Centred logo lockup in 021 C on clear PET. Supplied on the 16 oz canvas and re-placed onto the taller, wider cold cone at its drawn size — 74.5 mm across. Each line is treated separately: the ring mark and BAGELS sit rigid and undistorted, while WOODGRAIN and HAND ROLLED IN COLORADO are bent onto their own arcs, since a straight element that wide would droop about 2 mm at its ends.' },
+      { id: 'blank', label: 'Blank', texture: '', transTexture: '',
+        note: 'The bare cup. Print method is still open — clear PET is usually printed after forming rather than from a flat blank, and could equally end up a shrink sleeve or a label. Lid style undecided.' },
+    ],
+  },
+];
+
+// Textures are rebaked in place, so their URLs must change or a browser will
+// happily keep serving the previous artwork. make-texture.py stamps this.
+let ASSET_V = String(Date.now());
+try {
+  const r = await fetch('version.txt', { cache: 'no-store' });
+  if (r.ok) ASSET_V = (await r.text()).trim() || ASSET_V;
+} catch { /* fall back to a per-load value, which is always fresh */ }
+const asset = (u) => (u ? `${u}?v=${ASSET_V}` : '');
+
+const viewer = document.getElementById('viewer');
+const sizeTabs = document.getElementById('sizes');
+const designTabs = document.getElementById('designs');
+const controlsEl = document.getElementById('controls');
+const specEl = document.getElementById('spec');
+const noteEl = document.getElementById('designNote');
+
+let sizeIx = 0, designIx = 0, fill = 'none', lidOn = true;
+
+function segmented(label, items, active, onPick) {
+  const wrap = document.createElement('div');
+  wrap.className = 'ctl';
+  const name = document.createElement('span');
+  name.textContent = label;
+  const seg = document.createElement('div');
+  seg.className = 'seg';
+  for (const it of items) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = it.label;
+    b.setAttribute('aria-pressed', String(it.value === active));
+    b.addEventListener('click', () => onPick(it.value));
+    seg.appendChild(b);
+  }
+  wrap.append(name, seg);
+  return wrap;
+}
+
+function tabs(host, items, active, onPick) {
+  host.replaceChildren(...items.map((it, i) => {
+    const b = document.createElement('button');
+    b.role = 'tab';
+    b.textContent = it.label;
+    b.setAttribute('aria-selected', String(i === active));
+    b.tabIndex = i === active ? 0 : -1;
+    b.addEventListener('click', () => onPick(i));
+    b.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      onPick((i + d + items.length) % items.length);
+      host.children[(i + d + items.length) % items.length].focus();
+    });
+    return b;
+  }));
+}
+
+function render() {
+  const s = SIZES[sizeIx];
+  const d = s.designs[designIx];
+
+  tabs(sizeTabs, SIZES, sizeIx, (i) => { sizeIx = i; designIx = 0; render(); });
+  tabs(designTabs, s.designs, designIx, (i) => { designIx = i; render(); });
+
+  const controls = [segmented('Fill', [
+    { label: 'None', value: 'none' },
+    { label: 'Light', value: 'light' },
+    { label: 'Dark', value: 'dark' },
+  ], fill, (v) => { fill = v; render(); })];
+  if (s.lid !== 'none') {
+    controls.push(segmented('Lid', [
+      { label: 'On', value: true }, { label: 'Off', value: false },
+    ], lidOn, (v) => { lidOn = v; render(); }));
+  }
+  controlsEl.replaceChildren(...controls);
+
+  viewer.setAttribute('cup', s.cup);
+  viewer.setAttribute('lid', s.lid === 'none' || !lidOn ? 'none' : s.lid);
+  viewer.setAttribute('fill', fill);
+  viewer.setAttribute('texture', asset(d.texture));
+  if (d.transTexture) viewer.setAttribute('transmission-texture', asset(d.transTexture));
+  else viewer.removeAttribute('transmission-texture');
+  if (s.material) viewer.setAttribute('material', s.material);
+  else viewer.removeAttribute('material');
+  if (s.rim) viewer.setAttribute('rim-color', s.rim);
+  else viewer.removeAttribute('rim-color');
+
+  specEl.replaceChildren(...s.spec.flatMap(([k, v]) => {
+    const dt = document.createElement('dt'); dt.textContent = k;
+    const dd = document.createElement('dd');
+    dd.innerHTML = v.replace('{design}', d.label);
+    return [dt, dd];
+  }));
+  noteEl.textContent = d.note;
+}
+
+render();
+
+// loaded last and at the current version, so the element upgrades with every
+// attribute already set — and never against stale cup data
+await import(`./cup-viewer.js?v=${ASSET_V}`);
+</script>
