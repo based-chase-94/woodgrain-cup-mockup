@@ -129,9 +129,10 @@ const SIZES = [
   {
     id: '16oz-cold', label: '16 oz Cold', cup: 'woodgrain-16oz-cold',
     lid: 'none', material: 'clear', rim: '',
+    ink: '<span class="swatch"></span>PMS Orange 021 C, 1-colour on clear',
     spec: [['Size', '16 oz cold, clear PET'],
            ['Dimensions', '95 mm rim · 60 mm base · 132 mm tall'],
-           ['Ink', '<span class="swatch"></span>PMS Orange 021 C, 1-colour on clear'],
+           ['Ink', '{ink}'],
            ['Graphic', '{design}'],
            ['Lid', 'Undecided']],
     designs: [
@@ -139,6 +140,11 @@ const SIZES = [
         texture: 'textures/16oz-cold-abstract.png',
         transTexture: 'textures/16oz-cold-abstract-trans.png',
         note: 'The 16 oz hot Abstract, re-laid onto this cone in 021 C on clear rather than black on a flood — a full orange flood would cover the very thing that makes a PET cup worth using. The mark still wraps a full 360° and bleeds off the base; 11% of it folds into the crimp. Nothing was redrawn: the same elements are re-placed, the mark across the whole wrap and the three lockup lines against their own reference radius.' },
+      { id: 'abstract-black', label: 'Abstract (Black)',
+        ink: '<span class="swatch" style="background:#111"></span>Black, 1-colour on clear',
+        texture: 'textures/16oz-cold-abstract-black.png',
+        transTexture: 'textures/16oz-cold-abstract-black-trans.png',
+        note: 'The same Abstract placement in black rather than 021 C — identical geometry, only the ink changed. Black on clear reads strongly over a light drink and disappears over a dark one, since on a clear cup whatever is behind the ink is its background. Try the Fill toggle both ways.' },
       { id: 'fourteeners', label: 'Fourteeners',
         texture: 'textures/16oz-cold-fourteeners.png',
         transTexture: 'textures/16oz-cold-fourteeners-trans.png',
@@ -154,9 +160,10 @@ const SIZES = [
   {
     id: '24oz-cold', label: '24 oz Cold', cup: 'woodgrain-24oz-cold',
     lid: 'none', material: 'clear', rim: '',
+    ink: '<span class="swatch"></span>PMS Orange 021 C, 1-colour on clear',
     spec: [['Size', '24 oz cold, clear PET'],
            ['Dimensions', '98 mm rim · 60 mm base · 180 mm tall'],
-           ['Ink', '<span class="swatch"></span>PMS Orange 021 C, 1-colour on clear'],
+           ['Ink', '{ink}'],
            ['Graphic', '{design}'],
            ['Lid', 'Undecided']],
     designs: [
@@ -164,6 +171,11 @@ const SIZES = [
         texture: 'textures/24oz-cold-fourteeners.png',
         transTexture: 'textures/24oz-cold-fourteeners-trans.png',
         note: 'Redrawn at true size in wrap space, then re-laid onto the cone — 59 cells across seven bands: title, five rows of peaks, and the tagline. Each is rotated onto its own radial so everything reads level. Rows wrap 309–331°, spanning 28–154 mm up the cup. All ink inside the safe area. A light ink on clear still needs a white underbase to reach this density in print.' },
+      { id: 'fourteeners-black', label: 'Fourteeners (Black)',
+        ink: '<span class="swatch" style="background:#111"></span>Black, 1-colour on clear',
+        texture: 'textures/24oz-cold-fourteeners-black.png',
+        transTexture: 'textures/24oz-cold-fourteeners-black-trans.png',
+        note: 'The same Fourteeners chart in black rather than 021 C — all 59 cells keep their exact placement, only the ink changed. Black on clear is strong over a light drink and vanishes over a dark one; the Fill toggle shows both.' },
       { id: 'straight-logo', label: 'Straight Logo',
         texture: 'textures/24oz-cold-straight-logo.png',
         transTexture: 'textures/24oz-cold-straight-logo-trans.png',
@@ -263,7 +275,7 @@ function render() {
   specEl.replaceChildren(...s.spec.flatMap(([k, v]) => {
     const dt = document.createElement('dt'); dt.textContent = k;
     const dd = document.createElement('dd');
-    dd.innerHTML = v.replace('{design}', d.label);
+    dd.innerHTML = v.replace('{design}', d.label).replace('{ink}', d.ink || s.ink || '—');
     return [dt, dd];
   }));
   noteEl.textContent = d.note;
