@@ -1,2 +1,18 @@
+# Not honored at this path.
+#
+# Crawlers only read robots.txt at a domain root. This site is served from
+# https://based-chase-94.github.io/<repo>/, so this file sits at
+# /<repo>/robots.txt and is never fetched by anything. It previously said
+# "Disallow: /", which read as though the site were blocked from crawling. It
+# was not, and never had been.
+#
+# The control that actually works here is the per-page directive:
+#
+#     <meta name="robots" content="noindex, nofollow">
+#
+# Crawling is allowed on purpose. A Disallow would stop crawlers fetching the
+# page at all -- and a page that is never fetched is a page whose noindex is
+# never read, which leaves the bare URL eligible to be listed anyway.
+
 User-agent: *
-Disallow: /
+Allow: /
