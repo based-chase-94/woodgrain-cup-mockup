@@ -2,6 +2,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<script>
+// Self-heal a stale page. GitHub Pages serves index.html with max-age=600 and
+// its headers cannot be changed, so a client who already has the page cached
+// can sit on an old design list for ten minutes without knowing. Compare the
+// stamp baked in here against the deployed one and reload once if they differ.
+// version_stamp.py keeps this in step with version.txt.
+(function () {
+  var BUILD = '1789509998';
+  var key = 'wg-cup-reloaded';
+  try { if (sessionStorage.getItem(key) === BUILD) return; } catch (e) { return; }
+  fetch('version.txt', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.text() : null; })
+    .then(function (v) {
+      if (!v) return;
+      v = v.trim();
+      window.__wgVersion = v;
+      if (!v || v === BUILD) return;
+      // remember the stamp we reloaded FROM, so a reload can never loop
+      try { sessionStorage.setItem(key, BUILD); } catch (e) {}
+      location.replace(location.pathname + '?v=' + encodeURIComponent(v));
+    })
+    .catch(function () {});
+})();
+</script>
 <title>Woodgrain Cup Mockups</title>
 <style>
   :root {
@@ -151,10 +175,14 @@ const SIZES = [
 // Textures are rebaked in place, so their URLs must change or a browser will
 // happily keep serving the previous artwork. make-texture.py stamps this.
 let ASSET_V = String(Date.now());
-try {
-  const r = await fetch('version.txt', { cache: 'no-store' });
-  if (r.ok) ASSET_V = (await r.text()).trim() || ASSET_V;
-} catch { /* fall back to a per-load value, which is always fresh */ }
+if (window.__wgVersion) {
+  ASSET_V = window.__wgVersion;
+} else {
+  try {
+    const r = await fetch('version.txt', { cache: 'no-store' });
+    if (r.ok) ASSET_V = (await r.text()).trim() || ASSET_V;
+  } catch { /* fall back to a per-load value, which is always fresh */ }
+}
 const asset = (u) => (u ? `${u}?v=${ASSET_V}` : '');
 
 const viewer = document.getElementById('viewer');
