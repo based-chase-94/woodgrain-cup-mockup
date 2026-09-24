@@ -9,7 +9,7 @@
 // stamp baked in here against the deployed one and reload once if they differ.
 // version_stamp.py keeps this in step with version.txt.
 (function () {
-  var BUILD = '1789509998';
+  var BUILD = '1790273869';
   var key = 'wg-cup-reloaded';
   try { if (sessionStorage.getItem(key) === BUILD) return; } catch (e) { return; }
   fetch('version.txt', { cache: 'no-store' })
@@ -152,22 +152,17 @@ const SIZES = [
   {
     id: '16oz-cold', label: '16 oz Cold', cup: 'woodgrain-16oz-cold',
     lid: 'none', material: 'clear', rim: '',
-    ink: '<span class="swatch"></span>PMS Orange 021 C, 1-colour on clear',
+    ink: '<span class="swatch" style="background:#111"></span>Black, 1-colour on clear',
     spec: [['Size', '16 oz cold, clear PET'],
            ['Dimensions', '95 mm rim · 60 mm base · 132 mm tall'],
            ['Ink', '{ink}'],
            ['Graphic', '{design}'],
            ['Lid', 'Undecided']],
     designs: [
-      { id: 'abstract-black', label: 'Abstract (Black)',
-        ink: '<span class="swatch" style="background:#111"></span>Black, 1-colour on clear',
-        texture: 'textures/16oz-cold-abstract-black.png',
-        transTexture: 'textures/16oz-cold-abstract-black-trans.png',
-        note: 'Woodgrain mark wrapping one side with the lockup set opposite, black on clear PET. Drawn at true size in wrap space for this cup, then re-laid onto the cone: the mark is projected across the full 360° while the lockup lines are placed against one reference radius. Bleeds off the base — 13% of the ink folds into the crimp. Black on clear reads strongly over a light drink and disappears over a dark one; the Fill toggle shows both.' },
-      { id: 'fourteeners', label: 'Fourteeners',
-        texture: 'textures/16oz-cold-fourteeners.png',
-        transTexture: 'textures/16oz-cold-fourteeners-trans.png',
-        note: 'Redrawn at true size in wrap space, then re-laid onto the cone — 54 cells, each rotated onto its own radial so the rows read level. Five rows of peaks wrapping 322–327°, spanning 21–113 mm up the cup. All ink inside the safe area, nothing lapping at the seam.' },
+      { id: 'handrolled', label: 'Hand-Rolled',
+        texture: 'textures/16oz-cold-handrolled.png',
+        transTexture: 'textures/16oz-cold-handrolled-trans.png',
+        note: 'Two marks set 145° apart — the full lockup on one face, the HAND-ROLLED WITH LOVE roundel on the other — black on clear PET. Drawn at true size in wrap space for this cup, then re-laid onto the cone. Both are placed rigid, which is the only treatment that leaves them undistorted: the roundel has to stay a circle, and the lockup is 41 mm tall, too tall to bend onto an arc without shearing it. The trade is that WOODGRAIN is straight rather than level — its ends sit about 2 mm lower than its centre relative to the rim, which is what a straight-printed wordmark does on a tapered cup. Ink runs 31–101 mm up the cup, well inside the safe area; nothing folds into the crimp or laps the seam.' },
     ],
   },
 ];
