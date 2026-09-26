@@ -9,7 +9,7 @@
 // stamp baked in here against the deployed one and reload once if they differ.
 // version_stamp.py keeps this in step with version.txt.
 (function () {
-  var BUILD = '1790290768';
+  var BUILD = '1790386633';
   var key = 'wg-cup-reloaded';
   try { if (sessionStorage.getItem(key) === BUILD) return; } catch (e) { return; }
   fetch('version.txt', { cache: 'no-store' })
@@ -162,7 +162,7 @@ const SIZES = [
       { id: 'handrolled', label: 'Hand-Rolled',
         texture: 'textures/16oz-cold-handrolled.png',
         transTexture: 'textures/16oz-cold-handrolled-trans.png',
-        note: 'Two marks set 145° apart — the full lockup on one face, the HAND-ROLLED GIVES IT SOUL roundel on the other — black on clear PET. Drawn at true size in wrap space for this cup, then re-laid onto the cone. Both are placed rigid, which is the only treatment that leaves them undistorted: the roundel has to stay a circle, and the lockup is 41 mm tall, too tall to bend onto an arc without shearing it. The trade is that WOODGRAIN is straight rather than level — its ends sit about 2 mm lower than its centre relative to the rim, which is what a straight-printed wordmark does on a tapered cup. Ink runs 31–101 mm up the cup, well inside the safe area; nothing folds into the crimp or laps the seam.' },
+        note: 'Two marks set 144° apart — the full lockup on one face, the HAND / ROLLED · GIVES IT / SOUL badge on the other — black on clear PET. Drawn at true size in wrap space for this cup, then re-laid onto the cone as five rigid cells across four bands: the badge stack taller than the lockup, its four type lines each placed at their own height. Rigid is the only treatment that leaves them undistorted — the bagel mark has to stay round, and the lockup is 41 mm tall, too tall to bend onto an arc without shearing it. On the flat die the badge fans out along a radial, which is what a vertical stack has to do on a cone; wrapped, it reads as a centred column. The trade is that WOODGRAIN is straight rather than level — its ends sit about 2 mm lower than its centre relative to the rim, which is what a straight-printed wordmark does on a tapered cup. Ink runs 19.5–111 mm up the cup, inside the safe area with 4.6 mm to spare at the foot; nothing folds into the crimp or laps the seam.' },
     ],
   },
 ];
